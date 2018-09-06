@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MascotAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adopciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Mascotas" Type="bigint" Nullable="false" />
+    <Property Name="Id_Fundaciones" Type="bigint" Nullable="false" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Detalle_Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Usuarios" Type="bigint" Nullable="false" />
+    <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fecha_Nacimiento" Type="datetime" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Celular" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Donaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Usuarios" Type="bigint" Nullable="false" />
+    <Property Name="Id_Fundaciones" Type="bigint" Nullable="false" />
+    <Property Name="Fecha_Donacion" Type="datetime" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Fundaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Telefonos" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Mascotas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Descripcion" Type="text" Nullable="false" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Raza" Type="varchar" MaxLength="20" />
+    <Property Name="Edad" Type="int" />
+    <Property Name="Foto" Type="text" Nullable="false" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Solicitudes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Usuarios" Type="bigint" Nullable="false" />
+    <Property Name="Id_Adopciones" Type="bigint" Nullable="false" />
+    <Property Name="Fecha_Solicitud" Type="datetime" />
+    <Property Name="Estado_Solicitud" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Contrasena" Type="text" Nullable="false" />
+    <Property Name="Token" Type="text" Nullable="false" />
+    <Property Name="Foto_Perfil" Type="text" Nullable="false" />
+    <Property Name="Fecha_Creacion" Type="datetime" />
+    <Property Name="Rol" Type="int" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <Association Name="detalusuario">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Detalle_Usuario" Type="Self.Detalle_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Detalle_Usuario">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="donafun">
+    <End Role="Fundaciones" Type="Self.Fundaciones" Multiplicity="1" />
+    <End Role="Donaciones" Type="Self.Donaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fundaciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Donaciones">
+        <PropertyRef Name="Id_Fundaciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="donausua">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Donaciones" Type="Self.Donaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Donaciones">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fundadop">
+    <End Role="Fundaciones" Type="Self.Fundaciones" Multiplicity="1" />
+    <End Role="Adopciones" Type="Self.Adopciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fundaciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adopciones">
+        <PropertyRef Name="Id_Fundaciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="mascadop">
+    <End Role="Mascotas" Type="Self.Mascotas" Multiplicity="1" />
+    <End Role="Adopciones" Type="Self.Adopciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascotas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adopciones">
+        <PropertyRef Name="Id_Mascotas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="soladop">
+    <End Role="Adopciones" Type="Self.Adopciones" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adopciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="Id_Adopciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="solusua">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MascotAppModelStoreContainer">
+    <EntitySet Name="Adopciones" EntityType="Self.Adopciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle_Usuario" EntityType="Self.Detalle_Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donaciones" EntityType="Self.Donaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fundaciones" EntityType="Self.Fundaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mascotas" EntityType="Self.Mascotas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="detalusuario" Association="Self.detalusuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Detalle_Usuario" EntitySet="Detalle_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="donafun" Association="Self.donafun">
+      <End Role="Fundaciones" EntitySet="Fundaciones" />
+      <End Role="Donaciones" EntitySet="Donaciones" />
+    </AssociationSet>
+    <AssociationSet Name="donausua" Association="Self.donausua">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Donaciones" EntitySet="Donaciones" />
+    </AssociationSet>
+    <AssociationSet Name="fundadop" Association="Self.fundadop">
+      <End Role="Fundaciones" EntitySet="Fundaciones" />
+      <End Role="Adopciones" EntitySet="Adopciones" />
+    </AssociationSet>
+    <AssociationSet Name="mascadop" Association="Self.mascadop">
+      <End Role="Mascotas" EntitySet="Mascotas" />
+      <End Role="Adopciones" EntitySet="Adopciones" />
+    </AssociationSet>
+    <AssociationSet Name="soladop" Association="Self.soladop">
+      <End Role="Adopciones" EntitySet="Adopciones" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="solusua" Association="Self.solusua">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

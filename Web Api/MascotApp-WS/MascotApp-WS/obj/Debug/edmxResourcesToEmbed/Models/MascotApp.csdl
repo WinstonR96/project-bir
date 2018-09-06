@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MascotAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Adopciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Mascotas" Type="Int64" Nullable="false" />
+    <Property Name="Id_Fundaciones" Type="Int64" Nullable="false" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Fundaciones" Relationship="Self.fundadop" FromRole="Adopciones" ToRole="Fundaciones" />
+    <NavigationProperty Name="Mascotas" Relationship="Self.mascadop" FromRole="Adopciones" ToRole="Mascotas" />
+    <NavigationProperty Name="Solicitudes" Relationship="Self.soladop" FromRole="Adopciones" ToRole="Solicitudes" />
+  </EntityType>
+  <EntityType Name="Detalle_Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Usuarios" Type="Int64" Nullable="false" />
+    <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="3" />
+    <Property Name="Ciudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Celular" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.detalusuario" FromRole="Detalle_Usuario" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Donaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Usuarios" Type="Int64" Nullable="false" />
+    <Property Name="Id_Fundaciones" Type="Int64" Nullable="false" />
+    <Property Name="Fecha_Donacion" Type="DateTime" Precision="3" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Fundaciones" Relationship="Self.donafun" FromRole="Donaciones" ToRole="Fundaciones" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.donausua" FromRole="Donaciones" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Fundaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefonos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Adopciones" Relationship="Self.fundadop" FromRole="Fundaciones" ToRole="Adopciones" />
+    <NavigationProperty Name="Donaciones" Relationship="Self.donafun" FromRole="Fundaciones" ToRole="Donaciones" />
+  </EntityType>
+  <EntityType Name="Mascotas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Raza" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Edad" Type="Int32" />
+    <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Adopciones" Relationship="Self.mascadop" FromRole="Mascotas" ToRole="Adopciones" />
+  </EntityType>
+  <EntityType Name="Solicitudes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Usuarios" Type="Int64" Nullable="false" />
+    <Property Name="Id_Adopciones" Type="Int64" Nullable="false" />
+    <Property Name="Fecha_Solicitud" Type="DateTime" Precision="3" />
+    <Property Name="Estado_Solicitud" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Adopciones" Relationship="Self.soladop" FromRole="Solicitudes" ToRole="Adopciones" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.solusua" FromRole="Solicitudes" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Foto_Perfil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+    <Property Name="Rol" Type="Int32" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Detalle_Usuario" Relationship="Self.detalusuario" FromRole="Usuarios" ToRole="Detalle_Usuario" />
+    <NavigationProperty Name="Donaciones" Relationship="Self.donausua" FromRole="Usuarios" ToRole="Donaciones" />
+    <NavigationProperty Name="Solicitudes" Relationship="Self.solusua" FromRole="Usuarios" ToRole="Solicitudes" />
+  </EntityType>
+  <Association Name="fundadop">
+    <End Role="Fundaciones" Type="Self.Fundaciones" Multiplicity="1" />
+    <End Role="Adopciones" Type="Self.Adopciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fundaciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adopciones">
+        <PropertyRef Name="Id_Fundaciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="mascadop">
+    <End Role="Mascotas" Type="Self.Mascotas" Multiplicity="1" />
+    <End Role="Adopciones" Type="Self.Adopciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascotas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adopciones">
+        <PropertyRef Name="Id_Mascotas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="soladop">
+    <End Role="Adopciones" Type="Self.Adopciones" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adopciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="Id_Adopciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalusuario">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Detalle_Usuario" Type="Self.Detalle_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Detalle_Usuario">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="donafun">
+    <End Role="Fundaciones" Type="Self.Fundaciones" Multiplicity="1" />
+    <End Role="Donaciones" Type="Self.Donaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fundaciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Donaciones">
+        <PropertyRef Name="Id_Fundaciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="donausua">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Donaciones" Type="Self.Donaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Donaciones">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="solusua">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MascotAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Adopciones" EntityType="Self.Adopciones" />
+    <EntitySet Name="Detalle_Usuario" EntityType="Self.Detalle_Usuario" />
+    <EntitySet Name="Donaciones" EntityType="Self.Donaciones" />
+    <EntitySet Name="Fundaciones" EntityType="Self.Fundaciones" />
+    <EntitySet Name="Mascotas" EntityType="Self.Mascotas" />
+    <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="fundadop" Association="Self.fundadop">
+      <End Role="Fundaciones" EntitySet="Fundaciones" />
+      <End Role="Adopciones" EntitySet="Adopciones" />
+    </AssociationSet>
+    <AssociationSet Name="mascadop" Association="Self.mascadop">
+      <End Role="Mascotas" EntitySet="Mascotas" />
+      <End Role="Adopciones" EntitySet="Adopciones" />
+    </AssociationSet>
+    <AssociationSet Name="soladop" Association="Self.soladop">
+      <End Role="Adopciones" EntitySet="Adopciones" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="detalusuario" Association="Self.detalusuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Detalle_Usuario" EntitySet="Detalle_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="donafun" Association="Self.donafun">
+      <End Role="Fundaciones" EntitySet="Fundaciones" />
+      <End Role="Donaciones" EntitySet="Donaciones" />
+    </AssociationSet>
+    <AssociationSet Name="donausua" Association="Self.donausua">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Donaciones" EntitySet="Donaciones" />
+    </AssociationSet>
+    <AssociationSet Name="solusua" Association="Self.solusua">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
