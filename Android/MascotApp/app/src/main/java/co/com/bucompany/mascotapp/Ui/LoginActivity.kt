@@ -64,7 +64,6 @@ class LoginActivity : Activity() {
         //Metodos.toast(applicationContext, json.toString())
         val solicitudDashobard : SolVentanaDashboard = SolVentanaDashboard(Triggers.VentanaDashboard,LR,this)
         Reactor.getInstance().ProcesarSolicitud(solicitudDashobard)
-        finish()
 
     }
 }

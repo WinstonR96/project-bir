@@ -7,9 +7,12 @@ import android.util.Log
 import co.com.bucompany.mascotapp.Common.Constantes
 import co.com.bucompany.mascotapp.Common.MyVolley
 import co.com.bucompany.mascotapp.Core.Entorno
+import co.com.bucompany.mascotapp.Core.Interfaces.IResultadoLogin
 import co.com.bucompany.mascotapp.Core.Interfaces.IVista
 import co.com.bucompany.mascotapp.Core.Metodos.Metodos
 import co.com.bucompany.mascotapp.Entidades.Request.LoginRequest
+import co.com.bucompany.mascotapp.Entidades.Response.LoginResponse
+import co.com.bucompany.mascotapp.Entidades.Usuarios
 import co.com.bucompany.mascotapp.Ui.DashboardActivity
 import co.com.bucompany.mascotapp.Ui.LoginActivity
 import com.android.volley.Request
@@ -19,7 +22,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import org.json.JSONObject
 
-class ModelVista : IVista {
+class ModelVista: IVista {
+    override val Usuarios : IResultadoLogin = ModelResultadoLogin.getInstance()
 
     companion object {
         @Volatile
@@ -33,28 +37,11 @@ class ModelVista : IVista {
 
 
     override fun MostrarVentanaDashboard(c: Context?, lr:LoginRequest?) {
-        var jsonobj = JSONObject()
-        jsonobj.put("Usuario", lr!!.Usuario.toString())
-        jsonobj.put("Contrasena", lr!!.Contrasena.toString())
-        jsonobj.put("Email", lr!!.Email.toString())
-        val queue = MyVolley.getInstance(c!!).requestQueue
+        val intent = Intent(c, DashboardActivity::class.java)
+        //startActivity(c!!, intent, null)
+        c!!.startActivity(intent)
 
-        val request = JsonObjectRequest(Request.Method.POST, Constantes.Value.login, jsonobj,
-                Response.Listener {
-                    response ->
-                    Log.i("Request",response.toString())
-                    Metodos.toast(c!!,response["CodigoMensaje"].toString())
-                },
-                Response.ErrorListener {
-                    error->
-                    Log.i("Request Login error", error.toString())
-                    Metodos.toast(c!!,error.toString())
-        })
 
-        MyVolley.getInstance(c!!).addToRequestQueue(request)
-
-        val intent = Intent(c,DashboardActivity::class.java)
-        startActivity(c!!,intent, null)
     }
 
 
@@ -65,3 +52,5 @@ class ModelVista : IVista {
 
 
 }
+
+

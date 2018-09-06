@@ -5,6 +5,8 @@ import co.com.bucompany.mascotapp.Entidades.Request.LoginRequest
 
 interface IVista {
 
+    val Usuarios : IResultadoLogin
+
     fun MostrarVentanaLogin(c: Context?)
     fun MostrarVentanaDashboard(c: Context?, lr:LoginRequest?)
 
