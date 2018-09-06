@@ -108,3 +108,4 @@ C:\Users\wrodriguez\source\repos\MascotApp-WS\MascotApp-WS\obj\Release\MascotApp
 C:\Users\wrodriguez\source\repos\MascotApp-WS\MascotApp-WS\obj\Release\MascotApp-WS.csproj.CopyComplete
 C:\Users\wrodriguez\source\repos\MascotApp-WS\MascotApp-WS\obj\Release\MascotApp-WS.dll
 C:\Users\wrodriguez\source\repos\MascotApp-WS\MascotApp-WS\obj\Release\MascotApp-WS.pdb
+C:\Users\wrodriguez\source\repos\MascotApp-WS\MascotApp-WS\obj\Release\MascotApp-WS.csprojAssemblyReference.cache

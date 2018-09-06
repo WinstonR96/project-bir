@@ -17,7 +17,7 @@ namespace MascotApp_WS.Controllers
             AdopcionResponse ar = new AdopcionResponse();
             Adopcion a = null;
             DataSet ds = InstruccionesSql.ejecutar_select("SELECT f.Nombre AS Fundacion, m.* FROM Adopciones a INNER JOIN Mascotas m ON a.Id = m.Id INNER JOIN Fundaciones f ON m.Id = a.Id; ");
-            if ((ds.Tables.Count == 0) && (ds.Tables[0].Rows.Count == 0))
+            if ((ds.Tables.Count != 0) && (ds.Tables[0].Rows.Count > 0))
             {
                 List<Adopcion> la = new List<Adopcion>(ds.Tables[0].Rows.Count);
                 foreach(DataRow mascotas in ds.Tables[0].Rows)

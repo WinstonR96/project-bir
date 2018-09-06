@@ -9,8 +9,8 @@ namespace MascotApp_WS.Models
 {
     public static class InstruccionesSql
     {
-        private static string connString = "data source=A1528361\\SQLEXPRESS; Initial catalog=MascotApp; Integrated Security = True";
-
+        //private static string connString = "data source=A1528361\\SQLEXPRESS; Initial catalog=MascotApp; Integrated Security = True";
+        private static string connString = "data source=A1528361\\SQLEXPRESS; Initial catalog=MascotApp; user id = sa; password = Redsiswr24";
 
         public static DataSet ejecutar_select(string query)
         {
