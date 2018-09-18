@@ -5,10 +5,7 @@ import co.com.bucompany.mascotapp.Core.Interfaces.IResultadoLogin
 import co.com.bucompany.mascotapp.Entidades.Response.LoginResponse
 
 class ModelResultadoLogin : IResultadoLogin {
-    override var Response: LoginResponse ?= null
-        get() =  Response
-
-
+    override var response: LoginResponse? = null
 
 
     companion object {
@@ -18,5 +15,7 @@ class ModelResultadoLogin : IResultadoLogin {
                 INSTANCE ?: synchronized(this){
                     INSTANCE ?: ModelResultadoLogin()
                 }
+
+
     }
 }

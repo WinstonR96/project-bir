@@ -1,5 +1,6 @@
 package co.com.bucompany.mascotapp.Core.Comandos
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import co.com.bucompany.mascotapp.Common.Constantes
@@ -37,12 +38,16 @@ class CmdVentanaDashboard: ComandoAbstract {
                     var loginresponse : LoginResponse = gson?.fromJson(response.toString(), LoginResponse::class.java)
                     Log.i("Request",loginresponse.CodigoMensaje.toString())
                     Log.i("Request",loginresponse.Mensaje.toString())
-                    Log.i("Request",loginresponse.usuario.toString())
                     if(loginresponse.CodigoMensaje == "01"){
-                        //Entorno.getInstance().Vista!!.Usuarios.Response = loginresponse
+                        Log.i("Request",loginresponse.usuario.toString())
+                        Entorno.getInstance().Vista.usuario?.response = loginresponse
                         Entorno.getInstance().Vista!!.MostrarVentanaDashboard(solventanadashboard?.c, solventanadashboard?.Lr)
 
                     }
+                    if(loginresponse.CodigoMensaje == "02"){
+                        Metodos.toast(solventanadashboard!!.c!!, loginresponse.Mensaje)
+                    }
+
                     if (loginresponse.CodigoMensaje == "0"){
                         Metodos.toast(solventanadashboard!!.c!!, loginresponse.Mensaje)
                     }

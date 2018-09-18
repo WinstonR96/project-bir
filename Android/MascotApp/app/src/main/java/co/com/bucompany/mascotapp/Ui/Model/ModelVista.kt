@@ -22,8 +22,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import org.json.JSONObject
 
-class ModelVista: IVista {
-    override val Usuarios : IResultadoLogin = ModelResultadoLogin.getInstance()
+class ModelVista(override var usuario: IResultadoLogin? = ModelResultadoLogin.getInstance()) : IVista {
+
 
     companion object {
         @Volatile

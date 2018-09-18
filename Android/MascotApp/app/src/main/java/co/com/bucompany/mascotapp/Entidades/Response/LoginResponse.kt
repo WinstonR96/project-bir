@@ -3,7 +3,7 @@ package co.com.bucompany.mascotapp.Entidades.Response
 import co.com.bucompany.mascotapp.Entidades.Usuarios
 
 class LoginResponse(
-        val CodigoMensaje : String,
-        val Mensaje : String,
-        val usuario : Usuarios
+        var CodigoMensaje : String,
+        var Mensaje : String,
+        var usuario : Usuarios
 )
